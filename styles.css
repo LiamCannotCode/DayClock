@@ -8,6 +8,7 @@ body {
   height: 100vh;
   margin: 0;
   font-family: 'Helvetica Neue', Arial, sans-serif;
+  padding: 0 10%; /* Add padding to keep content 10% away from screen edges */
 }
 
 .display {
@@ -17,22 +18,31 @@ body {
 
 .circle-container {
   position: relative;
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  border: 10px solid #444;
+  width: calc(80vw); /* Circle width is 80% of the viewport width */
+  height: calc(80vw); /* Circle height matches the width for a perfect circle */
+  max-width: 400px; /* Set a maximum size for the circle */
+  max-height: 400px; /* Set a maximum size for the circle */
   margin-bottom: 20px;
 }
 
 .circle {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background: conic-gradient(#4caf50 0%, #f44336 0%);
-  transition: background 0.5s ease; /* Smooth transition for color change */
+  transform: rotate(-90deg); /* Rotate to start progress from the top */
+}
+
+.progress-ring {
+  fill: none;
+  stroke: #4caf50; /* Progress color */
+  stroke-width: 10;
+  stroke-linecap: round; /* Rounded ends for the progress */
+  stroke-dasharray: 314; /* Total circumference of the circle (2 * π * r) */
+  stroke-dashoffset: 314; /* Start with no progress (hidden) */
+  transition: stroke-dashoffset 0.5s ease; /* Smooth progress animation */
+}
+
+.background-ring {
+  fill: none;
+  stroke: #444; /* Background circle color */
+  stroke-width: 10;
 }
 
 #current-time {
