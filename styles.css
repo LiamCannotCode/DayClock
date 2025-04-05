@@ -35,7 +35,7 @@ body {
 }
 
 .circle {
-  transform: rotate(180deg); /* Rotate 90 degrees to flip the progress direction */
+  transform: rotate(-90deg); /* Rotate 90 degrees to flip the progress direction */
 }
 
 .progress-ring {
