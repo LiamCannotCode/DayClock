@@ -3,14 +3,13 @@ function pad(num) {
   return String(num).padStart(2, '0');
 }
 
-// Helper function to format a duration (in milliseconds) as hh:mm:ss
+// Helper function to format a duration (in milliseconds) as hh:mm
 function formatTime(duration) {
   let totalSeconds = Math.floor(duration / 1000);
   const hours = pad(Math.floor(totalSeconds / 3600));
   totalSeconds %= 3600;
   const minutes = pad(Math.floor(totalSeconds / 60));
-  const seconds = pad(totalSeconds % 60);
-  return `${hours}:${minutes}:${seconds}`;
+  return `${hours}:${minutes}`; // Exclude seconds
 }
 
 // Function to update the progress circle
@@ -27,11 +26,12 @@ function updateCircle(progress) {
 function updateClock() {
   const now = new Date();
 
-  // Display current time
-  const hoursStr = pad(now.getHours());
-  const minutesStr = pad(now.getMinutes());
-  const secondsStr = pad(now.getSeconds());
-  document.getElementById('current-time').textContent = `${hoursStr}:${minutesStr}:${secondsStr}`;
+  // Display current time in 12-hour format with AM/PM
+  let hours = now.getHours();
+  const minutes = pad(now.getMinutes());
+  const period = hours >= 12 ? "PM" : "AM";
+  hours = hours % 12 || 12; // Convert to 12-hour format (0 becomes 12)
+  document.getElementById('current-time').textContent = `${hours}:${minutes} ${period}`;
 
   // Set key times for today
   const year = now.getFullYear();
