@@ -25,6 +25,15 @@ body {
   margin-bottom: 20px;
 }
 
+.circle-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 90%; /* Ensure content stays 5% away from the inner side of the ring */
+}
+
 .circle {
   transform: rotate(180deg); /* Rotate 90 degrees to flip the progress direction */
 }
@@ -46,11 +55,18 @@ body {
 }
 
 #current-time {
-  font-size: 3em;
+  font-size: 2em; /* Make the text size equal for both */
+  margin: 0;
 }
 
 #timer {
-  font-size: 2em;
+  font-size: 2em; /* Match the size of the current time */
+  margin: 0;
+}
+
+#period {
+  font-size: 1.5em; /* Slightly smaller for AM/PM */
+  margin-top: 5px;
 }
 
 #mode {

@@ -31,7 +31,8 @@ function updateClock() {
   const minutes = pad(now.getMinutes());
   const period = hours >= 12 ? "PM" : "AM";
   hours = hours % 12 || 12; // Convert to 12-hour format (0 becomes 12)
-  document.getElementById('current-time').textContent = `${hours}:${minutes} ${period}`;
+  document.getElementById('current-time').textContent = `${hours}:${minutes}`;
+  document.getElementById('period').textContent = period;
 
   // Set key times for today
   const year = now.getFullYear();

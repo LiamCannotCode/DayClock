@@ -9,16 +9,18 @@
   <div class="display">
     <!-- Circle container around the clock -->
     <div class="circle-container">
-        <svg class="circle" width="100%" height="100%" viewBox="0 0 100 100">
-          <!-- Background circle -->
-          <circle class="background-ring" cx="50" cy="50" r="45"></circle>
-          <!-- Progress circle -->
-          <circle class="progress-ring" cx="50" cy="50" r="45"></circle>
-        </svg>
+      <svg class="circle" width="100%" height="100%" viewBox="0 0 100 100">
+        <!-- Background circle -->
+        <circle class="background-ring" cx="50" cy="50" r="45"></circle>
+        <!-- Progress circle -->
+        <circle class="progress-ring" cx="50" cy="50" r="45"></circle>
+      </svg>
+      <div class="circle-content">
+        <div id="current-time">--:--</div>
+        <div id="timer">Timer</div>
+        <div id="period">--</div>
       </div>
-    <div id="current-time">--:--:--</div>
-    <div id="timer">Timer</div>
-    <div id="mode">Mode: --</div>
+    </div>
   </div>
   <script src="DayClock.js"></script>
 </body>
