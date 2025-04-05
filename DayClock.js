@@ -3,10 +3,10 @@ function pad(num) {
   return String(num).padStart(2, '0');
 }
 
-// Helper function to format a duration (in milliseconds) as hh:mm
+// Helper function to format a duration (in milliseconds) as h:mm
 function formatTime(duration) {
   let totalSeconds = Math.floor(duration / 1000);
-  const hours = pad(Math.floor(totalSeconds / 3600));
+  const hours = Math.floor(totalSeconds / 3600); // No leading zero for hours
   totalSeconds %= 3600;
   const minutes = pad(Math.floor(totalSeconds / 60));
   return `${hours}:${minutes}`; // Exclude seconds

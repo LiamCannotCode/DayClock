@@ -55,17 +55,20 @@ body {
 }
 
 #current-time {
-  font-size: 2em; /* Make the text size equal for both */
+  font-size: 4.5em; /* Increase font size */
+  font-weight: bold; /* Make the text thicker */
   margin: 0;
 }
 
 #timer {
-  font-size: 2em; /* Match the size of the current time */
+  font-size: 4.5em; /* Increase font size */
+  font-weight: bold; /* Make the text thicker */
   margin: 0;
 }
 
 #period {
-  font-size: 1.5em; /* Slightly smaller for AM/PM */
+  font-size: 3em; /* Adjust size for AM/PM */
+  font-weight: bold; /* Make it thicker */
   margin-top: 5px;
 }
 
