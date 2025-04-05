@@ -1,0 +1,30 @@
+body {
+    background-color: #121212;
+    color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+  }
+  
+  .display {
+    margin: 20px;
+    text-align: center;
+  }
+  
+  #current-time {
+    font-size: 3em;
+  }
+  
+  #timer {
+    font-size: 2em;
+  }
+  
+  #mode {
+    font-size: 1.2em;
+    margin-top: 10px;
+    color: #a0a0a0;
+  }
