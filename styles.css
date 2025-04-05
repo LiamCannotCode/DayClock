@@ -31,7 +31,7 @@ body {
 
 .progress-ring {
   fill: none;
-  stroke: #4caf50; /* Progress color */
+  stroke: #ffffff; /* Change progress color to white */
   stroke-width: 10;
   stroke-linecap: round; /* Rounded ends for the progress */
   stroke-dasharray: 314; /* Total circumference of the circle (2 * π * r) */
@@ -41,7 +41,7 @@ body {
 
 .background-ring {
   fill: none;
-  stroke: #444; /* Background circle color */
+  stroke: #121212; /* Match the background color */
   stroke-width: 10;
 }
 
@@ -54,7 +54,5 @@ body {
 }
 
 #mode {
-  font-size: 1.2em;
-  margin-top: 10px;
-  color: #a0a0a0;
+  display: none; /* Hide the mode text */
 }
