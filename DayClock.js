@@ -5,6 +5,7 @@ function pad(num) {
 
 // Helper function to format a duration (in milliseconds) as h:mm
 function formatTime(duration) {
+  duration += 60000; // Add 1 minute (60,000 milliseconds)
   let totalSeconds = Math.floor(duration / 1000);
   const hours = Math.floor(totalSeconds / 3600); // No leading zero for hours
   totalSeconds %= 3600;
