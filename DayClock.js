@@ -17,7 +17,7 @@ function updateCircle(progress) {
   const circle = document.querySelector('.progress-ring');
   const radius = 45; // Radius of the circle
   const circumference = 2 * Math.PI * radius; // Circumference of the circle
-  const offset = circumference - (progress / 100) * circumference; // Calculate offset based on progress
+  const offset = circumference - (progress / 100) * circumference; // Calculate offset for clockwise direction
   circle.style.strokeDasharray = `${circumference} ${circumference}`; // Set the dash array
   circle.style.strokeDashoffset = offset; // Set the dash offset to show progress
 }
