@@ -13,25 +13,11 @@ function pad(num) {
     return `${hours}:${minutes}:${seconds}`;
   }
   
-  // Alarm times and their associated sound file URLs
-  const alarms = {
-    "08:00": "sounds/morningAlarm.mp3",     // 8:00 AM morning alarm
-    "12:00": "sounds/specialNoon.mp3",        // 12:00 PM special sound
-    "14:00": "sounds/specialTwoPM.mp3",       // 2:00 PM special sound
-    "20:00": "sounds/eveningAlarm.mp3",       // 8:00 PM end-of-day alarm
-    "22:00": "sounds/bedtimeFirst.mp3",       // 10:00 PM bedtime first call
-    "23:00": "sounds/bedtimeLast.mp3"         // 11:00 PM bedtime last call
-  };
-  
-  // Variable to track the last minute when an alarm was played
-  let lastAlarmMinute = "";
-  
-  // Function to play an alarm sound given a URL
-  function playSound(url) {
-    const audio = new Audio(url);
-    audio.play().catch((error) => {
-      console.error("Error playing sound:", error);
-    });
+  // Function to update the progress circle
+  function updateCircle(progress) {
+    const circle = document.getElementById('circle');
+    // Apply the conic-gradient to visually represent the progress
+    circle.style.background = `conic-gradient(#4caf50 ${progress}%, #f44336 ${progress}%)`;
   }
   
   // Main update function: updates the clock, the custom timer, and checks alarms
@@ -44,21 +30,6 @@ function pad(num) {
     const secondsStr = pad(now.getSeconds());
     document.getElementById('current-time').textContent = `${hoursStr}:${minutesStr}:${secondsStr}`;
   
-    // Alarm check: form current time in HH:MM format
-    const currentMinuteStr = `${hoursStr}:${minutesStr}`;
-    // Check if we haven't played an alarm this minute and if this minute is one of our alarm times
-    if (currentMinuteStr !== lastAlarmMinute && alarms.hasOwnProperty(currentMinuteStr)) {
-      // To trigger the alarm at the beginning of the minute, only play if seconds are "00"
-      if (secondsStr === "00") {
-        playSound(alarms[currentMinuteStr]);
-        lastAlarmMinute = currentMinuteStr;
-      }
-    }
-    // Reset lastAlarmMinute if minute changes (to allow future alarms)
-    if (currentMinuteStr !== lastAlarmMinute && secondsStr !== "00") {
-      lastAlarmMinute = "";
-    }
-  
     // Set key times for today
     const year = now.getFullYear();
     const month = now.getMonth(); // zero-indexed
@@ -67,34 +38,36 @@ function pad(num) {
     const time8am = new Date(year, month, day, 8, 0, 0);
     const time8pm = new Date(year, month, day, 20, 0, 0);
     const time10pm = new Date(year, month, day, 22, 0, 0);
+    const time8amNextDay = new Date(year, month, day + 1, 8, 0, 0); // For the next day, 8 AM
   
     let timerDisplay = "";
     let modeText = "";
+    let progress = 0;
   
     // Determine which period we are in
     if (now >= time8am && now < time8pm) {
       // From 8:00 am to 8:00 pm: countdown to 8:00 pm
       const diff = time8pm - now;
+      progress = ((time8pm - now) / (time8pm - time8am)) * 100; // Calculate progress as percentage
       timerDisplay = formatTime(diff);
       modeText = "Countdown to 8:00 PM";
     } else if (now >= time8pm && now < time10pm) {
       // From 8:00 pm to 10:00 pm: countdown to 10:00 pm
       const diff = time10pm - now;
+      progress = ((time10pm - now) / (time10pm - time8pm)) * 100;
       timerDisplay = formatTime(diff);
       modeText = "Countdown to 10:00 PM";
     } else {
       // From 10:00 pm to 8:00 am: count up from 10:00 pm.
-      // For times after midnight (before 8:00 am), use yesterday's 10:00 pm.
-      let startTime;
-      if (now >= time10pm) {
-        startTime = time10pm;
-      } else {
-        startTime = new Date(year, month, day - 1, 22, 0, 0);
-      }
+      let startTime = (now >= time10pm) ? time10pm : time8pmNextDay;
       const diff = now - startTime;
+      progress = ((now - time10pm) / (time8amNextDay - time10pm)) * 100; // Count up from 10 PM to 8 AM
       timerDisplay = formatTime(diff);
       modeText = "Count up from 10:00 PM";
     }
+  
+    // Update the circle's visual progress
+    updateCircle(progress);
   
     document.getElementById('timer').textContent = timerDisplay;
     document.getElementById('mode').textContent = `Mode: ${modeText}`;
@@ -103,3 +76,4 @@ function pad(num) {
   // Start updating every second
   setInterval(updateClock, 1000);
   updateClock();
+  
