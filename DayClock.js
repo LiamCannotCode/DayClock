@@ -44,7 +44,6 @@ function updateClock() {
   const time8amNextDay = new Date(year, month, day + 1, 8, 0, 0); // For the next day, 8 AM
 
   let timerDisplay = "";
-  let modeText = "";
   let progress = 0;
 
   // Determine which period we are in
@@ -53,28 +52,24 @@ function updateClock() {
     const diff = time8pm - now;
     progress = ((time8pm - now) / (time8pm - time8am)) * 100; // Calculate progress as percentage
     timerDisplay = formatTime(diff);
-    modeText = "Countdown to 8:00 PM";
   } else if (now >= time8pm && now < time10pm) {
     // From 8:00 pm to 10:00 pm: countdown to 10:00 pm
     const diff = time10pm - now;
     progress = ((time10pm - now) / (time10pm - time8pm)) * 100;
     timerDisplay = formatTime(diff);
-    modeText = "Countdown to 10:00 PM";
   } else {
     // From 10:00 pm to 8:00 am: count up from 10:00 pm.
     let startTime = now >= time10pm ? time10pm : time8amNextDay;
     const diff = now - startTime;
     progress = ((now - time10pm) / (time8amNextDay - time10pm)) * 100; // Count up from 10 PM to 8 AM
     timerDisplay = formatTime(diff);
-    modeText = "Count up from 10:00 PM";
   }
 
   // Update the circle's visual progress
   updateCircle(progress);
 
-  // Update the timer and mode text
+  // Update the timer text
   document.getElementById('timer').textContent = timerDisplay;
-  document.getElementById('mode').textContent = modeText;
 }
 
 // Start updating every second
