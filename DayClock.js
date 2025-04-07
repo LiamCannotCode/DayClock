@@ -40,29 +40,29 @@ function updateClock() {
   const month = now.getMonth(); // zero-indexed
   const day = now.getDate();
 
-  const time8am = new Date(year, month, day, 8, 0, 0);
-  const time8pm = new Date(year, month, day, 20, 0, 0);
-  const time10pm = new Date(year, month, day, 22, 0, 0);
+  const time8am = new Date(year, month, day, 8, 0, 0); // 8:00 AM
+  const time725pm = new Date(year, month, day, 19, 25, 0); // 7:25 PM
+  const time10pm = new Date(year, month, day, 22, 0, 0); // 10:00 PM
   const time8amNextDay = new Date(year, month, day + 1, 8, 0, 0); // For the next day, 8 AM
 
   let timerDisplay = "";
   let progress = 0;
 
   // Determine which period we are in
-  if (now >= time8am && now < time8pm) {
-    // From 8:00 am to 8:00 pm: countdown to 8:00 pm
-    const diff = time8pm - now;
-    progress = ((time8pm - now) / (time8pm - time8am)) * 100; // Calculate progress as percentage
+  if (now >= time8am && now < time725pm) {
+    // From 8:00 AM to 7:25 PM: countdown to 7:25 PM
+    const diff = time725pm - now;
+    progress = ((time725pm - now) / (time725pm - time8am)) * 100; // Calculate progress as percentage
     timerDisplay = formatTime(diff);
     document.querySelector('.progress-ring').style.stroke = "#ffffff"; // White color
-  } else if (now >= time8pm && now < time10pm) {
-    // From 8:00 pm to 10:00 pm: countdown to 10:00 pm
+  } else if (now >= time725pm && now < time10pm) {
+    // From 7:25 PM to 10:00 PM: countdown to 10:00 PM
     const diff = time10pm - now;
-    progress = ((time10pm - now) / (time10pm - time8pm)) * 100;
+    progress = ((time10pm - now) / (time10pm - time725pm)) * 100;
     timerDisplay = formatTime(diff);
     document.querySelector('.progress-ring').style.stroke = "#ffffff"; // White color
   } else {
-    // From 10:00 pm to 8:00 am: count up from 10:00 pm.
+    // From 10:00 PM to 8:00 AM: count up from 10:00 PM.
     let startTime = now >= time10pm ? time10pm : time8amNextDay;
     const diff = now - startTime;
     progress = ((now - time10pm) / (time8amNextDay - time10pm)) * 100; // Count up from 10 PM to 8 AM
