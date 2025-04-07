@@ -64,6 +64,7 @@ body {
   font-size: 4em; /* Slightly smaller font size for the timer */
   font-weight: bold; /* Keep the text thick */
   margin: 0;
+  color: #FF4757; /* Change the color to #FF4757 */
 }
 
 #period {
