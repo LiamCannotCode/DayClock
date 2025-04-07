@@ -54,17 +54,20 @@ function updateClock() {
     const diff = time8pm - now;
     progress = ((time8pm - now) / (time8pm - time8am)) * 100; // Calculate progress as percentage
     timerDisplay = formatTime(diff);
+    document.querySelector('.progress-ring').style.stroke = "#ffffff"; // White color
   } else if (now >= time8pm && now < time10pm) {
     // From 8:00 pm to 10:00 pm: countdown to 10:00 pm
     const diff = time10pm - now;
     progress = ((time10pm - now) / (time10pm - time8pm)) * 100;
     timerDisplay = formatTime(diff);
+    document.querySelector('.progress-ring').style.stroke = "#ffffff"; // White color
   } else {
     // From 10:00 pm to 8:00 am: count up from 10:00 pm.
     let startTime = now >= time10pm ? time10pm : time8amNextDay;
     const diff = now - startTime;
     progress = ((now - time10pm) / (time8amNextDay - time10pm)) * 100; // Count up from 10 PM to 8 AM
     timerDisplay = formatTime(diff);
+    document.querySelector('.progress-ring').style.stroke = "#ff4500"; // Red color (Pomodoro app color)
   }
 
   // Update the circle's visual progress
